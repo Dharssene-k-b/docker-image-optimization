@@ -1,11 +1,14 @@
-FROM node:18-alpine AS builder
+FROM node:18
+
 WORKDIR /app
+
 COPY server/package*.json ./server/
+RUN cd server && npm install
+
+COPY server ./server
+
 WORKDIR /app/server
-RUN npm install --omit=dev
-FROM node:18-alpine
-WORKDIR /app
-COPY --from=builder /app/server/node_modules .server/node_modules
-COPY . .
+
 EXPOSE 5000
-CMD ["node","server/server.js"]
+
+CMD ["node", "server.js"]
