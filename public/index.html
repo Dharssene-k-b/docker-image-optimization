@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Tracker SPA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="background-animation"></div> 
+    <div class="main-wrapper">
+        <div class="header">
+            <h1><i class="fas fa-chart-line"></i> Dynamic BMI Tracker</h1>
+            <div id="header-controls">
+                <button id="profile-btn" class="action-button small-button primary-button hidden"><i class="fas fa-user"></i> Profile</button>
+            </div>
+        </div>
+
+        <section id="auth-section" class="app-section auth-view">
+            <div class="card auth-card">
+                <h2 id="auth-title">Login to Your Account</h2>
+                
+                <div class="input-group">
+                    <label for="auth-email">Email</label>
+                    <input type="email" id="auth-email" placeholder="enter your email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" placeholder="••••••••" required>
+                </div>
+                
+                <button id="auth-btn" class="action-button primary-button">Login</button>
+                <p id="auth-message" class="message-text"></p>
+
+                <div class="auth-links">
+                    <span id="forgot-password" class="link-text">Forgot Password?</span>
+                    <p class="switch-mode">
+                        <span id="switch-to-signup" class="link-text">
+                            Don't have an account? Sign Up
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="profile-section" class="app-section profile-view hidden">
+            <div class="card profile-card">
+                <div class="profile-header-details">
+                    <i class="fas fa-user-circle profile-icon"></i>
+                    <div>
+                        <h2>Welcome Back!</h2>
+                        <p class="profile-email" id="user-email-display"></p>
+                    </div>
+                </div>
+                
+                <hr>
+
+                <div class="profile-actions">
+                    <p>Manage your health data and settings below.</p>
+                    <button id="go-to-calc-btn" class="action-button primary-button"><i class="fas fa-calculator"></i> Go to BMI Calculator</button>
+                    <button id="profile-logout-btn" class="action-button danger-button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="calculator-section" class="app-section calculator-view hidden">
+            
+            <div class="card calculator-box">
+                <h2><i class="fas fa-dumbbell"></i> New Measurement</h2>
+                
+                <div class="input-group">
+                    <label for="height">Height</label>
+                    <div class="unit-input-container">
+                        <input type="number" id="height" placeholder="e.g., 175">
+                        <select id="height-unit">
+                            <option value="cm">cm</option>
+                            <option value="m">m</option>
+                            <option value="in">in</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="weight">Weight</label>
+                    <div class="unit-input-container">
+                        <input type="number" id="weight" placeholder="e.g., 70">
+                        <select id="weight-unit">
+                            <option value="kg">kg</option>
+                            <option value="lb">lb</option>
+                            <option value="st">st</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="calc-buttons">
+                    <button id="calculate-btn" class="action-button success-button"><i class="fas fa-plus-circle"></i> Calculate & Save</button>
+                    <button id="reset-btn" class="action-button secondary-button"><i class="fas fa-sync-alt"></i> Reset</button>
+                </div>
+                
+                <p id="calc-message" class="message-text"></p>
+                
+                <div class="result-box">
+                    <h3>Your BMI</h3>
+                    <div class="bmi-display">
+                        <span id="bmi">0.0</span>
+                    </div>
+                    <p id="bmi-category">Category: <span id="category" class="initial-status">Awaiting data</span></p>
+                </div>
+            </div>
+            
+            <div class="card history-box">
+                <h2><i class="fas fa-history"></i> Your History & Progress</h2>
+                
+                <ul id="history-list" class="detailed-list">
+                    <li class="loading-item"><i class="fas fa-spinner fa-spin"></i> Loading records...</li>
+                </ul>
+                
+                <hr>
+                
+                <div class="chart-container">
+                    <canvas id="bmiChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content card">
+            <span class="close-btn">&times;</span>
+            <h3>Forgot Password</h3>
+            <p>Enter your email to receive a password reset link.</p>
+            <div class="input-group">
+                <label for="forgot-email">Email</label>
+                <input type="email" id="forgot-email" placeholder="email address" required>
+            </div>
+            <button id="send-reset-btn" class="action-button primary-button">Send Reset Link</button>
+            <p id="forgot-message" class="message-text"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
