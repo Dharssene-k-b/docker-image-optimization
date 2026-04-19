@@ -1,5 +1,5 @@
 // public/script.js
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:5005/api';
 const AUTH_URL = `${API_BASE_URL}/users`;
 const BMI_URL = `${API_BASE_URL}/bmi`;
 
