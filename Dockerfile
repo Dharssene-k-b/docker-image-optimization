@@ -7,6 +7,9 @@ RUN cd server && npm install
 
 COPY server ./server
 
+# IMPORTANT: copy public folder
+COPY public ./public
+
 WORKDIR /app/server
 
 EXPOSE 5000
